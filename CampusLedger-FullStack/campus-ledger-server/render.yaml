@@ -1,0 +1,14 @@
+# Render "Blueprint": New + > Blueprint, point at your GitHub repo. DATABASE_URL is entered in the dashboard.
+services:
+  - type: web
+    name: campus-ledger
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start        # applies new database migrations, then starts the server
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
